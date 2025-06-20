@@ -35,7 +35,8 @@
           advanced: {
             redirectUri: "https://onedrive-picker-demo.web.app", // ✅ válido
             scope: "files.readwrite",
-            folderSelect: true
+            folderSelect: true,
+			openInNewWindow: false 
           },
           success: function (folder) {
             if (window.flutter_inappwebview) {
