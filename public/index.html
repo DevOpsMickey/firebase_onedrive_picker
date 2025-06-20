@@ -30,13 +30,15 @@
       document.getElementById("launch").addEventListener("click", function () {
         var odOptions = {
           clientId: "76c1d462-a573-4508-9b52-127da2119ef7",
-          action: "query", // ✅ correcto
+          action: "share",
           multiSelect: false,
+		  openInNewWindow: false,
           advanced: {
             redirectUri: "https://onedrive-picker-demo.web.app", // ✅ válido
             scope: "files.readwrite",
             folderSelect: true,
-			openInNewWindow: false 
+			openInNewWindow: false,
+			filter: "folder"
           },
           success: function (folder) {
             if (window.flutter_inappwebview) {
