@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>OneDrive Folder Picker</title>
+    <script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        font-family: sans-serif;
+      }
+      #launch {
+        padding: 12px 24px;
+        font-size: 16px;
+        background-color: #0078d4;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="launch">Seleccionar carpeta</button>
+
+    <script type="text/javascript">
+      document.getElementById("launch").addEventListener("click", function () {
+        var odOptions = {
+          clientId: "76c1d462-a573-4508-9b52-127da2119ef7",
+          action: "query", // ✅ correcto
+          multiSelect: false,
+          advanced: {
+            redirectUri: "https://login.live.com/oauth20_desktop.srf", // ✅ válido
+            scope: "files.readwrite",
+            folderSelect: true
+          },
+          success: function (folder) {
+            if (window.flutter_inappwebview) {
+              window.flutter_inappwebview.callHandler("onFolderSelected", folder);
+            } else {
+              alert("Flutter handler no disponible");
+            }
+          },
+          cancel: function () {
+            console.log("Selección cancelada");
+          },
+          error: function (e) {
+            console.error("Error en Picker:", e);
+            if (window.flutter_inappwebview) {
+              window.flutter_inappwebview.callHandler("onPickerError", e);
+            }
+          }
+        };
+
+        OneDrive.open(odOptions);
+      });
+    </script>
+  </body>
+</html>
