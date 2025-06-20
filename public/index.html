@@ -48,11 +48,12 @@
           action: "query",
           multiSelect: false,
           viewType: "folders",
-          openInNewWindow: false,
+          openInNewWindow: true,
           advanced: {
             redirectUri: "https://onedrive-picker-demo.web.app",
             scope: "files.readwrite",
-            folderSelect: true
+            folderSelect: true,
+			openInNewWindow: true,
           },
           success: function (folder) {
             if (window.flutter_inappwebview) {
